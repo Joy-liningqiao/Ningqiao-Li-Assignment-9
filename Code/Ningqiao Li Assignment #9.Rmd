@@ -5,3 +5,44 @@ date: "April 12, 2020"
 output: html_notebook
 ---
 
+***
+
+#### Part I
+#### 1. Create a graph to compare the PTSD scores of women who suffered childhood sexual abuse to those who did not suffer childhood sexual abuse.
+```{r include=FALSE}
+library(here)
+my_data <- read.csv(here("Data", "Sexual Abuse Data.csv"))
+
+```
+
+```{r}
+library(tidyverse)
+ggplot(my_data, aes(x = csa, y = ptsd)) +
+  geom_boxplot() +
+  labs (title = "Comparison of PTSD score beteen two groups")
+
+```
+
+
+#### 2. Create a graph to compare the childhood physical abuse scores of women who suffered childhood sexual abuse to those who did not suffer childhood sexual abuse.
+```{r}
+ggplot(my_data, aes(x = csa, y = cpa)) +
+  geom_boxplot() +
+  labs (title = "Comparison of CPA score beteen two groups")
+```
+
+
+#### 3. Create a scatterplot that relates PTSD scores (the response variable) to childhood physical abuse scores (the explanatory variable). Use different types of points and colors to differentiate between the women who suffered childhood sexual abuse and those who did not suffer childhood sexual abuse. Put two linear regression lines on your plot to relate PTSD to childhood physical abuse separately for those who suffered childhood sexual abuse and those who did not. Use the same color as the related points for the regression lines to make it obvious which points relate to which group. 
+
+```{r}
+ggplot(my_data, aes(x = cpa, y = ptsd, color = csa)) +
+  geom_point() +
+  stat_smooth(method = "lm", se = FALSE) +
+  labs (title = "Scatterplot and Regression") +
+  scale_color_manual(values = c("Red", "Blue"))
+```
+
+
+
+
+
